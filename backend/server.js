@@ -3,6 +3,8 @@ import express from "express";
 import colors from "colors";
 import connectDB from "./db/database.js";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+dotenv.config();
 
 // ROUTES
 import authRouter from "./routes/auth.router.js";
@@ -17,7 +19,7 @@ import webhookRouter from "./routes/webhook.router.js";
 import verifyPaymentRouter from "./routes/verifyPayment.router.js";
 import adminRouter from "./routes/admin.router.js";
 
-import cors from 'cors'
+import cors from "cors";
 import helmet from "helmet";
 
 const app = express();
@@ -26,13 +28,13 @@ app.use(
   helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" }, // ✅ allow images
     crossOriginEmbedderPolicy: false, // 🔥 IMPORTANT
-  })
+  }),
 );
 app.use(
   cors({
     origin: process.env.CLIENT_SIDE_URL,
     credentials: true,
-  })
+  }),
 );
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
@@ -40,7 +42,6 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 connectDB();
-
 
 app.use(
   "/api/webhook",
