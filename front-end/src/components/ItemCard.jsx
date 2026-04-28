@@ -18,7 +18,7 @@ const ItemCard = ({
         <Link to={`/product/${productId}`}>
           <div className="cart-img max-h-40 w-full overflow-hidden">
             <img
-              src={`${import.meta.env.VITE_API_URL}${img}`}
+              src={img}
               alt=""
               className="max-h-40 w-full "
             />

@@ -31,7 +31,7 @@ const CartsCart = (c) => {
       <div className="flex gap-3 md:gap-5 items-center border w-full p-1 rounded-sm relative  shadow-lg dark:bg-slate-800 dark:text-white/60">
         <img
           className="w-24 h-32 md:w-40 md:h-40"
-          src={`${import.meta.env.VITE_API_URL}${img}`}
+          src={img}
           alt=""
         />
         <div>

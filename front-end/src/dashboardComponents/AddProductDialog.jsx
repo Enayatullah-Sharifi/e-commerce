@@ -43,12 +43,13 @@ const AddProductDialog = ({ onClose, mode, product }) => {
     formData.append("image", e.target.files[0]);
     setImageIsUploading(true);
     try {
-      const res = await fetch("/api/upload", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
         method: "POST",
         body: formData,
       });
 
       const data = await res.json();
+      console.log(data)
       if (!res.ok) {
         setImageIsUploading(false);
         toast.error("Error Uploading file");
@@ -62,9 +63,14 @@ const AddProductDialog = ({ onClose, mode, product }) => {
       toast.success(data.message);
     } catch (err) {
       setImageIsUploading(false);
-      toast.error(err?.message | err.error);
+      toast.error(err?.message || err?.error);
     }
   };
+
+  // if (!formData.image) {
+  //   toast.error("Please upload image first");
+  //   return;
+  // }
 
   const { mutate, isPending } = useMutation({
     mutationFn: addProduct,
@@ -87,16 +93,33 @@ const AddProductDialog = ({ onClose, mode, product }) => {
 
   useEffect(() => {
     if (mode === "edit" && product) {
-      setFormData({
-        name: product.name,
-        price: product.price,
-        qty: product.qty,
-        category: product.category,
-        image: product.img,
-        description: product.description,
+      setFormData((prev) => {
+        // prevent infinite / unnecessary updates
+        if (prev.name === product.name) return prev;
+
+        return {
+          name: product.name,
+          price: product.price,
+          qty: product.qty,
+          category: product.category,
+          image: product.img,
+          description: product.description,
+        };
       });
     }
   }, [mode, product]);
+  // useEffect(() => {
+  //   if (mode === "edit" && product) {
+  //     setFormData({
+  //       name: product.name,
+  //       price: product.price,
+  //       qty: product.qty,
+  //       category: product.category,
+  //       image: product.img,
+  //       description: product.description,
+  //     });
+  //   }
+  // }, [mode, product]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -117,7 +140,6 @@ const AddProductDialog = ({ onClose, mode, product }) => {
       });
     }
   };
-
 
   return (
     <>
@@ -218,7 +240,7 @@ const AddProductDialog = ({ onClose, mode, product }) => {
                 className="border rounded-sm h-10 px-3"
               />
               {imageIsUploading ? (
-                <h1>Image is Uploading...</h1>
+                <Loader2 className="animate-spin" />
               ) : (
                 <input
                   type="file"
@@ -228,7 +250,10 @@ const AddProductDialog = ({ onClose, mode, product }) => {
                 />
               )}
             </div>
-            <Button className="uppercase text-lg">
+            <Button
+              className="uppercase text-lg"
+              disabled={imageIsUploading || isPending}
+            >
               {isPending ? (
                 <Loader2 className="animate-spin bg-none" />
               ) : (

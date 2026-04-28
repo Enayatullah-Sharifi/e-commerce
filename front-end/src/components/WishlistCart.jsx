@@ -37,7 +37,7 @@ const WishlistCart = ({ _id, productId }) => {
         <div className="max-h-40 h-36 w-full">
           <Link to={`/product/${pId}`}>
             <img
-              src={`${import.meta.env.VITE_API_URL}${img}`}
+              src={img}
               alt=""
               className="max-h-full w-full"
             />
