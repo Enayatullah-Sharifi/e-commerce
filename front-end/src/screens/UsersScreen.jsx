@@ -8,7 +8,7 @@ const UsersScreen = () => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["customers"],
     queryFn: getAllUsers,
-    staleTime: 60 * 1000 * 5,
+    
   });
 
   if (isLoading)

@@ -3,7 +3,7 @@
 // import { Router } from "express";
 // const router = Router();
 
- // const storage = multer.diskStorage({
+// const storage = multer.diskStorage({
 // //   destination: (req, file, cb) => {
 // //     cb(null, "uploads/");
 // //   },
@@ -44,8 +44,6 @@
 
 // export default router;
 
-
-
 import multer from "multer";
 import { Router } from "express";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
@@ -81,7 +79,6 @@ export const upload = multer({
 });
 
 router.post("/", upload.single("image"), async (req, res) => {
-  console.log(req.file.path);
   res.send({
     message: "Image Uploaded",
     image: req.file.path, // ✅ Cloudinary URL

@@ -15,7 +15,6 @@ export default function CustomersChart() {
   const { data, isLoading } = useQuery({
     queryKey: ["customers"],
     queryFn: getCustomersStats,
-    staleTime: Infinity,
   });
 
   const monthNames = [

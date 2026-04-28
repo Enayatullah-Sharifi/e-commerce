@@ -52,7 +52,7 @@ const Slider = () => {
       {imgs && (
         <div className="max-w-[700px] h-[400px] w-full m-auto relative p-3">
           <img
-            src={`${import.meta.env.VITE_API_URL}${imgs[currentSlide]}`}
+            src={imgs[currentSlide]}
             alt=""
             className="bg-cover w-full h-full bg-center rounded-2xl duration-1000"
           />

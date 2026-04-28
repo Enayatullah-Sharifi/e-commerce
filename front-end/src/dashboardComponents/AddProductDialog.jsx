@@ -49,7 +49,7 @@ const AddProductDialog = ({ onClose, mode, product }) => {
       });
 
       const data = await res.json();
-      console.log(data)
+
       if (!res.ok) {
         setImageIsUploading(false);
         toast.error("Error Uploading file");
@@ -67,10 +67,6 @@ const AddProductDialog = ({ onClose, mode, product }) => {
     }
   };
 
-  // if (!formData.image) {
-  //   toast.error("Please upload image first");
-  //   return;
-  // }
 
   const { mutate, isPending } = useMutation({
     mutationFn: addProduct,
@@ -123,7 +119,10 @@ const AddProductDialog = ({ onClose, mode, product }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
+    if (!formData.image) {
+      toast.error("Please upload image first");
+      return;
+    }
     if (mode === "add") {
       mutate(formData);
       setFormData({

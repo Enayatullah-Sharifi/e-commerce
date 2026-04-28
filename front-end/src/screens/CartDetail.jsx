@@ -122,7 +122,7 @@ function CartDetail() {
             <div className="flex items-center justify-center relative group">
               <img
                 className="max-h-96 md:max-w-md"
-                src={`${import.meta.env.VITE_API_URL}${data?.img}`}
+                src={data?.img}
                 alt=""
               />
 
