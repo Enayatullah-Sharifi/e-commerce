@@ -30,7 +30,6 @@ const UserSchema = new mongoose.Schema(
     },
     img: {
       type: String,
-      default: "/uploads/user.png",
     },
     resetPasswordToken: {
       type: String,

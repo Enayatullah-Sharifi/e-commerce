@@ -16,6 +16,7 @@ import bcrypt from "bcryptjs";
 export const register = expressAsyncHandler(async (req, res) => {
   // 1)    get user information from client side
   const { username, email, password, password2 } = req.body;
+  const avatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(username || email)}&background=random&color=fff`;
 
   // 2)    validate user inputs
   const { errors, valid } = registerFormValidator(
@@ -42,6 +43,7 @@ export const register = expressAsyncHandler(async (req, res) => {
     username,
     email,
     password,
+    img: avatar,
   });
   // 6)     send a verification email to user's email
   if (user) {
