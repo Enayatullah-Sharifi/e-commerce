@@ -99,7 +99,7 @@ const Header = () => {
             <>
               <div className="dark:bg-white rounded-full p-[2px]">
                 <img
-                  src={`${import.meta.env.VITE_API_URL}${userInfo.img}`}
+                  src={userInfo?.img}
                   className="w-6 h-6 rounded-full"
                   onClick={openProfileDropDown}
                 />

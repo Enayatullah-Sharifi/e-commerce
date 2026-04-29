@@ -30,7 +30,7 @@ export const register = expressAsyncHandler(async (req, res) => {
     throw new Error(Object.values(errors));
   }
   // 3)    query database to fine the user
-  let user = await User.findOne({ email });
+  let user = await User.findOne({ email }).lean();
 
   // 4)    if user exist throw an error with user already exist
   if (user) {
@@ -52,22 +52,17 @@ export const register = expressAsyncHandler(async (req, res) => {
       userId: user._id,
     });
     const url = `${process.env.CLIENT_SIDE_URL}/api/auth/user/${user._id}/verify/${token.token}`;
-    await sendEmail(
-      email,
-      "A link sent to your email please valid your email",
-      url,
-    );
     res.status(201).json({
       success: true,
       message:
         "A verification link sent to your email please validate your email!",
     });
+    await sendEmail(
+      email,
+      "A link sent to your email please valid your email",
+      url,
+    ).catch((err) => console.error("Email error:", err));
   }
-  // 7)     response to user
-  res.status(201).json({
-    success: false,
-    message: "Something went wrong please try again",
-  });
 });
 
 // @desc    Login User

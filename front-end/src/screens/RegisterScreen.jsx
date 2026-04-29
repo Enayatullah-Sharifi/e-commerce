@@ -43,7 +43,6 @@ const RegisterScreen = () => {
       const jsonData = await res.json();
       if (!res.ok) {
         toast.error(jsonData.message);
-        console.log(jsonData);
         setIsLoading(false);
         return;
       }
