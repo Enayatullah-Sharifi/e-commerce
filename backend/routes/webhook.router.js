@@ -14,15 +14,22 @@ router.post("/", async (req, res) => {
     event = stripe.webhooks.constructEvent(
       req.body,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET
+      process.env.STRIPE_WEBHOOK_SECRET,
     );
   } catch (err) {
+    console.error("❌ Stripe Webhook Error:", err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  if (event.type === "checkout.session.expired") {
+  if (
+    event.type === "checkout.session.completed" &&
+    event.data.object.payment_status === "paid"
+  ) {
     const session = event.data.object;
-    const orderId = session.metadata.orderId;
+    if (!session.metadata || !session.metadata.orderId) {
+      console.error("❌ Missing orderId in metadata");
+      return res.status(400).json({ error: "Missing orderId" });
+    }
 
     await Order.findByIdAndUpdate(orderId, {
       status: "expired",
