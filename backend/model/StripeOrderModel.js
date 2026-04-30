@@ -1,21 +1,19 @@
-// models/order.model.js
-import mongoose from "mongoose";
-
 const orderSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     items: Array,
     totalAmount: Number,
-    paymentStatus: {
+
+    status: {
+      // ✅ ADD THIS
       type: String,
       enum: ["pending", "paid", "failed"],
       default: "pending",
     },
-    stripeSessionId: { type: String, unique: true },
+
+    stripeSessionId: String,
     paymentIntentId: String,
     address: Object,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
-
-export default mongoose.model("Order", orderSchema);

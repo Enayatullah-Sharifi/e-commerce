@@ -21,36 +21,36 @@ router.post("/", async (req, res) => {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  if (
-    event.type === "checkout.session.completed" &&
-    event.data.object.payment_status === "paid"
-  ) {
-    const session = event.data.object;
-    if (!session.metadata || !session.metadata.orderId) {
-      console.error("❌ Missing orderId in metadata");
-      return res.status(400).json({ error: "Missing orderId" });
+  const session = event.data.object;
+
+  console.log("🔥 EVENT:", event.type);
+
+  try {
+    if (event.type === "checkout.session.completed") {
+      const orderId = session.metadata?.orderId;
+
+      if (!orderId) {
+        console.error("❌ Missing orderId");
+        return res.status(400).json({ error: "Missing orderId" });
+      }
+
+      const order = await Order.findById(orderId);
+
+      if (!order) {
+        console.error("❌ Order not found");
+        return res.status(404).json({ error: "Order not found" });
+      }
+
+      if (order.status !== "paid") {
+        order.status = "paid";
+        order.stripeSessionId = session.id;
+        await order.save();
+        console.log("✅ Order marked paid:", orderId);
+      }
     }
-
-    await Order.findByIdAndUpdate(orderId, {
-      status: "expired",
-    });
-  }
-
-  // ✅ PAYMENT CONFIRMATION HAPPENS ONLY HERE
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object;
-
-    // 🔑 Get orderId from metadata
-    const orderId = session.metadata.orderId;
-
-    // Update order status
-    const order = await Order.findById(orderId);
-
-    if (order && order.status !== "paid") {
-      order.status = "paid";
-      order.stripeSessionId = session.id;
-      await order.save();
-    }
+  } catch (err) {
+    console.error("❌ Webhook processing error:", err.message);
+    return res.status(500).json({ error: err.message });
   }
 
   res.json({ received: true });
