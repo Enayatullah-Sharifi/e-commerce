@@ -40,9 +40,12 @@ function calculateProductDetail(cartItems) {
 // @route   POST    /api/order
 // @access  Private
 export const placeOrder = expressAsyncHandler(async (req, res) => {
+  const imageUrl = item.img?.startsWith("http")
+    ? item.img
+    : `${process.env.BASE_URL}${item.img || ""}`;
+
   const cartItems = req.body;
   if (cartItems.length < 1) {
-    console.log(cartItems);
     res.status(400).json({ message: "Cart is empty!" });
   }
   const { totalPrice, taxPrice, itemPrice, shippingPrice, imgUrls } =
@@ -55,7 +58,7 @@ export const placeOrder = expressAsyncHandler(async (req, res) => {
         currency: "usd",
         product_data: {
           name: item.name,
-          images: item.img ? [`${process.env.BASE_URL}${item.img}`] : [],
+           images: item.img ? [imageUrl] : [],
         },
         unit_amount: Math.round(price * 100),
       },
@@ -127,5 +130,6 @@ export const placeOrder = expressAsyncHandler(async (req, res) => {
 export const getOrders = expressAsyncHandler(async (req, res) => {
   const user = req.user.id;
   const orders = await Order.find({ user: user });
+
   res.status(200).json({ success: true, orders });
 });
