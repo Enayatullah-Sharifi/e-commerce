@@ -40,10 +40,6 @@ function calculateProductDetail(cartItems) {
 // @route   POST    /api/order
 // @access  Private
 export const placeOrder = expressAsyncHandler(async (req, res) => {
-  const imageUrl = item.img?.startsWith("http")
-    ? item?.img
-    : `${process.env.BASE_URL}${item?.img || ""}`;
-
   const cartItems = req.body;
   if (cartItems.length < 1) {
     res.status(400).json({ message: "Cart is empty!" });
@@ -53,12 +49,15 @@ export const placeOrder = expressAsyncHandler(async (req, res) => {
 
   const productLineItems = cartItems.map((item) => {
     const price = Number(item.discountedPrice ?? item.realPrice);
+    const imageUrl = item.img?.startsWith("http")
+      ? item?.img
+      : `${process.env.BASE_URL}${item?.img || ""}`;
     return {
       price_data: {
         currency: "usd",
         product_data: {
           name: item.name,
-           images: item.img ? [imageUrl] : [],
+          images: item.img ? [imageUrl] : [],
         },
         unit_amount: Math.round(price * 100),
       },
