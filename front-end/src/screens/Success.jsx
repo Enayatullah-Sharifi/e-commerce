@@ -21,15 +21,19 @@ export default function Success() {
     const interval = setInterval(async () => {
       attempts++;
 
-      const res = await fetch(`/api/orders/${orderId}/status`);
-      const data = await res.json();
+      try {
+        const res = await fetch(`/api/orders/${orderId}/status`);
+        const data = await res.json();
 
-      if (data.paid) {
-        setStatus("paid");
-        clearInterval(interval);
+        if (data.paid) {
+          setStatus("paid");
+          clearInterval(interval);
+        }
+      } catch (err) {
+        console.error("❌ Fetch error:", err.message);
       }
 
-      if (attempts > 10) {
+      if (attempts > 20) {
         setStatus("pending");
         clearInterval(interval);
       }
@@ -38,7 +42,7 @@ export default function Success() {
       dispatch(clearCart());
     }
     return () => clearInterval(interval);
-  }, [dispatch, status, orderId]);
+  }, [orderId]);
 
   if (status === "checking") {
     return (
@@ -63,12 +67,18 @@ export default function Success() {
       </div>
     );
   }
-  if (status === "unpaid")
+
+  if (status === "pending") {
+    return <div>Payment is still processing... please wait or refresh.</div>;
+  }
+
+  if (status === "unpaid") {
     return (
       <div>
         Payment not completed.{" "}
         <button onClick={() => navigate("/retry")}>Try Again</button>
       </div>
     );
+  }
   return <div>There was an error verifying payment.</div>;
 }
