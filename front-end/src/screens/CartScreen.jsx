@@ -45,7 +45,9 @@ const Cart = () => {
         {/* carts */}
         <div className="md:col-span-2 max-h-125  overflow-y-auto py-8 md:px-3 flex flex-col gap-2 dark:bg-slate-900">
           {cartItems.length > 0 ? (
-            cartItems?.map((c) => <CartsCart key={c?._id} props={c} />)
+            cartItems?.map((c, index) => (
+              <CartsCart key={c?._id || index} props={c} />
+            ))
           ) : (
             <div className="flex items-center gap-5 justify-center text-lg font-bold bg-white py-5 shadow dark:bg-slate-800">
               Cart is empty <FaCartPlus size={30} />
