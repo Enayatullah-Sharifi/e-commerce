@@ -41,8 +41,8 @@ function calculateProductDetail(cartItems) {
 // @access  Private
 export const placeOrder = expressAsyncHandler(async (req, res) => {
   const imageUrl = item.img?.startsWith("http")
-    ? item.img
-    : `${process.env.BASE_URL}${item.img || ""}`;
+    ? item?.img
+    : `${process.env.BASE_URL}${item?.img || ""}`;
 
   const cartItems = req.body;
   if (cartItems.length < 1) {
