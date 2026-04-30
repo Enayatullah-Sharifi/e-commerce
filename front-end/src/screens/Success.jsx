@@ -52,21 +52,24 @@ export default function Success() {
       </div>
     );
   }
-  if (status === "paid") {
-    return (
-      <div className="w-full h-96 flex items-center justify-center">
-        <div className="border p-10 rounded-md border-pink-200 font-bold hover:border-pink-500 hover:scale-101 transform transition duration-300">
-          Payment successful! Thank you.{" "}
-          <button
-            className="cursor-pointer"
-            onClick={() => navigate("../cart")}
-          >
-            Continue
-          </button>
+  useEffect(() => {
+    if (status === "paid") {
+      dispatch(clearCart());
+      return (
+        <div className="w-full h-96 flex items-center justify-center">
+          <div className="border p-10 rounded-md border-pink-200 font-bold hover:border-pink-500 hover:scale-101 transform transition duration-300">
+            Payment successful! Thank you.{" "}
+            <button
+              className="cursor-pointer"
+              onClick={() => navigate("../cart")}
+            >
+              Continue
+            </button>
+          </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
+  }, [status]);
 
   if (status === "pending") {
     return <div>Payment is still processing... please wait or refresh.</div>;
