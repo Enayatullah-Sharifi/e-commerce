@@ -32,10 +32,17 @@ app.use(
 );
 app.use(
   cors({
-    origin: process.env.CLIENT_SIDE_URL,
+    origin: (origin, callback) => {
+      if (!origin || origin === process.env.CLIENT_SIDE_URL) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
+
 // const __dirname = path.resolve();
 // app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
