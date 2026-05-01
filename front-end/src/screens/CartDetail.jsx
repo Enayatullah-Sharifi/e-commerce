@@ -131,7 +131,7 @@ function CartDetail() {
                 Add to Wishlist <FaHeart size={24} />
               </span> */}
 
-              <div className="absolute top-2 right-2 z-10">
+              <div className="absolute top-0 right-2 z-10">
                 {/* ❤️ Mobile: icon only */}
                 <button
                   onClick={() => addToWishListHandler(data?._id)}
@@ -150,7 +150,7 @@ function CartDetail() {
                 <span
                   className="
       hidden md:flex
-      absolute right-0 top-8
+      absolute right-10 bottom-5
       px-5 py-1 bg-(--dark-red--color) text-white
       items-center gap-4 rounded-sm cursor-pointer
       
