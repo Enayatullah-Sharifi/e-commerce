@@ -67,7 +67,6 @@ const AddProductDialog = ({ onClose, mode, product }) => {
     }
   };
 
-
   const { mutate, isPending } = useMutation({
     mutationFn: addProduct,
     onSuccess: (data) => {

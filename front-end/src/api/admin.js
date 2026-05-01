@@ -1,3 +1,5 @@
+import API from "./base";
+
 export const getAllProduct = async () => {
   try {
     const res = await fetch("/api/admin/products");
@@ -17,7 +19,7 @@ export const getAllProduct = async () => {
 
 export const getAllUsers = async () => {
   try {
-    const res = await fetch("/api/admin/users");
+    const res = await fetch(`${API}/api/admin/users`);
     const data = await res.json();
     if (!res.ok) {
       throw new Error("Error getting user");
@@ -33,7 +35,7 @@ export const getAllUsers = async () => {
 
 export const getAllOrders = async () => {
   try {
-    const res = await fetch("/api/admin/orders");
+    const res = await fetch(`${API}/api/admin/orders`);
     const data = await res.json();
     if (!res.ok) {
       throw new Error("Error getting orders");
@@ -46,7 +48,7 @@ export const getAllOrders = async () => {
 };
 
 export const updateOrderDelivery = async ({ orderId, delivered }) => {
-  const res = await fetch(`/api/admin/orders/${orderId}/deliver`, {
+  const res = await fetch(`${API}/api/admin/orders/${orderId}/deliver`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ delivered }),
@@ -60,7 +62,7 @@ export const updateOrderDelivery = async ({ orderId, delivered }) => {
 };
 
 export const deleteProductById = async (id) => {
-  const res = await fetch(`/api/admin/product/${id}`, {
+  const res = await fetch(`${API}/api/admin/product/${id}`, {
     method: "DELETE",
   });
 
@@ -73,7 +75,7 @@ export const deleteProductById = async (id) => {
 
 export const addProduct = async (formData) => {
   try {
-    const res = await fetch("/api/product", {
+    const res = await fetch(`${API}/api/product`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
@@ -92,7 +94,7 @@ export const addProduct = async (formData) => {
 };
 
 export const updateProduct = async ({ id, data }) => {
-  const res = await fetch(`/api/admin/product/${id}`, {
+  const res = await fetch(`${API}/api/admin/product/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -109,13 +111,13 @@ export const updateProduct = async ({ id, data }) => {
 };
 
 export const fetchActiveSale = async () => {
-  const res = await fetch("/api/admin/active");
+  const res = await fetch(`${API}/api/admin/active`);
   if (!res.ok) throw new Error("Failed to fetch sale");
   return res.json();
 };
 
 export const createSale = async (data) => {
-  const res = await fetch("/api/admin/sale", {
+  const res = await fetch(`${API}/api/admin/sale`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -127,7 +129,7 @@ export const createSale = async (data) => {
 
 export const getCustomersStats = async () => {
   try {
-    const res = await fetch("/api/admin/customers");
+    const res = await fetch(`${API}/api/admin/customers`);
     const data = await res.json();
 
     if (!res.ok) {

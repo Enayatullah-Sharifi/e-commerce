@@ -10,7 +10,7 @@ const ResetPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`/api/auth/forgotpassword/${resetToken}`, {
+      const res = await fetch(`${API}/api/auth/forgotpassword/${resetToken}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(password),

@@ -22,7 +22,7 @@ export default function Success() {
       attempts++;
 
       try {
-        const res = await fetch(`/api/orders/${orderId}/status`);
+        const res = await fetch(`${API}/api/orders/${orderId}/status`);
         const data = await res.json();
 
         if (data.paid) {
