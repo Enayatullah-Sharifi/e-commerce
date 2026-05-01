@@ -1,3 +1,5 @@
+import API from "./base";
+
 export const placeOrder = async function (cartItems) {
   
   try {

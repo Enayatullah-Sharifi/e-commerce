@@ -1,3 +1,5 @@
+import API from "./base";
+
 export const getTopProducts = async function ({ signal }) {
   try {
     const res = await fetch(`${API}/api/product/top`, { signal });

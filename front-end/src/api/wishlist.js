@@ -1,3 +1,4 @@
+import API from "./base";
 // Add product to wishlist
 export const addProductToWishlist = async (id) => {
   try {
@@ -19,11 +20,11 @@ export const getWishlist = async () => {
   try {
     const res = await fetch(`${API}/api/wishlist`);
     const data = await res.json();
-    
+
     if (!res.ok) {
       throw new Error(data?.message);
     }
-  
+
     return data;
   } catch (err) {
     throw new Error(err);
