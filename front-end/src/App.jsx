@@ -24,6 +24,7 @@ import Success from "./screens/Success";
 import AddDiscountScreen from "./screens/addDiscountScreen";
 import DashboardLayout from "./dashboardComponents/DashboardLayout";
 import AdminRoute from "./components/AdminRoute";
+import ProtectRoutes from "./components/ProtectRoutes";
 
 const App = () => {
   const { darkMode } = useSelector((state) => state?.theme);
@@ -35,7 +36,6 @@ const App = () => {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/wishlist" element={<WishlistScreen />} />
           <Route path="/product/:id" element={<CartDetail />} />
-          <Route path="/cart" element={<CartScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
 
@@ -45,10 +45,14 @@ const App = () => {
             element={<ResetPassword />}
           />
 
+          <Route element={<ProtectRoutes />}>
+            <Route path="/cart" element={<CartScreen />} />
+            <Route path="userOrders" element={<UserOrdersScreen />} />
+          </Route>
+
           <Route element={<AdminRoute />}>
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<DashboardScreen />} />
-              <Route path="userOrders" element={<UserOrdersScreen />} />
               <Route path="orders" element={<OrderScreen />} />
               <Route path="customers" element={<UsersScreen />} />
               <Route path="products" element={<ProductScreen />} />
