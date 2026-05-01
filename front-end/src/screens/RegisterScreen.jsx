@@ -1,4 +1,4 @@
-import API from "./base";
+import API from "../api/base";
 import React, { useState } from "react";
 import { MdOutlineMail } from "react-icons/md";
 import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";

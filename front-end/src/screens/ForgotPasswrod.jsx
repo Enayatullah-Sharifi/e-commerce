@@ -1,4 +1,4 @@
-import API from "./base";
+import API from "../api/base";
 import { useState } from "react";
 import { MdOutlineMail } from "react-icons/md";
 import { Link } from "react-router-dom";

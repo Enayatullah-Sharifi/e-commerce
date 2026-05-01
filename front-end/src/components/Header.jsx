@@ -1,4 +1,4 @@
-import API from "./base";
+import API from "../api/base";
 import { useState } from "react";
 import {
   FaCartPlus,

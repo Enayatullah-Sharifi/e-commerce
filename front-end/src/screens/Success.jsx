@@ -1,4 +1,4 @@
-import API from "./base";
+import API from "../api/base";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/features/cartSlice";
