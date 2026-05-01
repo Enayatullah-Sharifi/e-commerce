@@ -1,8 +1,8 @@
 import API from "../api/base";
 import React, { useState } from "react";
 import { MdOutlineMail } from "react-icons/md";
-import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { FaArrowAltCircleLeft, FaArrowLeft, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -37,7 +37,7 @@ const LoginScreen = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-        credentials: 'include'
+        credentials: "include",
       });
       const jsonData = await res.json();
 
@@ -63,6 +63,12 @@ const LoginScreen = () => {
       <div className="w-full h-[92vh] flex flex-col gap-3 justify-center items-center bg-slate-200">
         {isLoading && <Loader2 className="animate-spin" />}
         <div className="w-full px-5 py-5 mx-5 bg-white text-center rounded-lg md:max-w-2xl">
+        <Link
+          to="/"
+          className="float-start  text-dark  rounded-sm dark:text-white/80"
+        >
+          <FaArrowLeft size={20}/>
+        </Link>
           <h1 className="text-2xl font-semibold mb-10">Login to E-Commerce</h1>
           <form className="my-10" onSubmit={handleSubmit}>
             <div className="border flex items-center p-2 my-3 font-semibold text-xl rounded-sm">
