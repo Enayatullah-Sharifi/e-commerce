@@ -39,7 +39,6 @@ const App = () => {
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
 
-          <Route path="/userOrders" element={<UserOrdersScreen />} />
           <Route path="/forgotpassword" element={<ForgotPasswrod />} />
           <Route
             path="/forgotpassword/:resetToken"
@@ -48,6 +47,7 @@ const App = () => {
 
           <Route element={<AdminRoute />}>
             <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route path="/userOrders" element={<UserOrdersScreen />} />
               <Route index element={<DashboardScreen />} />
               <Route path="orders" element={<OrderScreen />} />
               <Route path="customers" element={<UsersScreen />} />
