@@ -2,7 +2,7 @@ import API from "./base";
 
 export const getAllProduct = async () => {
   try {
-    const res = await fetch("/api/admin/products", {
+    const res = await fetch(`${API}/api/admin/products`, {
       method: "GET",
       credentials: "include", // ✅ REQUIRED
     });
