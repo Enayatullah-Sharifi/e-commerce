@@ -2,7 +2,10 @@ import API from "./base";
 
 export const getAllProduct = async () => {
   try {
-    const res = await fetch("/api/admin/products");
+    const res = await fetch("/api/admin/products", {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
     const data = await res.json();
 
     if (!res.ok) {
@@ -19,7 +22,10 @@ export const getAllProduct = async () => {
 
 export const getAllUsers = async () => {
   try {
-    const res = await fetch(`${API}/api/admin/users`);
+    const res = await fetch(`${API}/api/admin/users`, {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
     const data = await res.json();
     if (!res.ok) {
       throw new Error("Error getting user");
@@ -35,7 +41,10 @@ export const getAllUsers = async () => {
 
 export const getAllOrders = async () => {
   try {
-    const res = await fetch(`${API}/api/admin/orders`);
+    const res = await fetch(`${API}/api/admin/orders`, {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
     const data = await res.json();
     if (!res.ok) {
       throw new Error("Error getting orders");
@@ -52,6 +61,7 @@ export const updateOrderDelivery = async ({ orderId, delivered }) => {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ delivered }),
+    credentials: "include",
   });
 
   if (!res.ok) {
@@ -79,6 +89,7 @@ export const addProduct = async (formData) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
+      credentials: "include",
     });
     const data = await res.json();
 
@@ -100,6 +111,7 @@ export const updateProduct = async ({ id, data }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+    credentials: "include",
   });
 
   if (!res.ok) {
@@ -111,7 +123,10 @@ export const updateProduct = async ({ id, data }) => {
 };
 
 export const fetchActiveSale = async () => {
-  const res = await fetch(`${API}/api/admin/active`);
+  const res = await fetch(`${API}/api/admin/active`, {
+    method: "GET",
+    credentials: "include", // ✅ REQUIRED
+  });
   if (!res.ok) throw new Error("Failed to fetch sale");
   return res.json();
 };
@@ -121,6 +136,7 @@ export const createSale = async (data) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
+    credentials: "include",
   });
 
   if (!res.ok) throw new Error("Failed to create sale");
@@ -129,7 +145,10 @@ export const createSale = async (data) => {
 
 export const getCustomersStats = async () => {
   try {
-    const res = await fetch(`${API}/api/admin/customers`);
+    const res = await fetch(`${API}/api/admin/customers`, {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
     const data = await res.json();
 
     if (!res.ok) {

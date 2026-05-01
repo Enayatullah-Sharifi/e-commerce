@@ -46,6 +46,7 @@ const AddProductDialog = ({ onClose, mode, product }) => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
         method: "POST",
         body: formData,
+        credentials: 'include'
       });
 
       const data = await res.json();

@@ -51,11 +51,14 @@ const Sidebar = ({ closeSidebar }) => {
     if (!result.isConfirmed) return;
     dispatch(logoutStart());
     try {
-      const jsonData = await fetch(`${API}/api/auth/logout`);
+      const jsonData = await fetch(`${API}/api/auth/logout`, {
+        method: "GET",
+        credentials: "include", // ✅ REQUIRED
+      });
       if (jsonData.ok) {
         dispatch(logoutSuccess());
 
-        navigate("/");
+        navigate("../");
       }
     } catch (err) {
       dispatch(logoutFailure(err));

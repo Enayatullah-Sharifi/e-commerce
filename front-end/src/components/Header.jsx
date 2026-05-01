@@ -53,7 +53,10 @@ const Header = () => {
 
     dispatch(logoutStart());
     try {
-      const jsonData = await fetch(`${API}/api/auth/logout`);
+      const jsonData = await fetch(`${API}/api/auth/logout`, {
+        method: "GET",
+        credentials: "include", // ✅ REQUIRED
+      });
       if (jsonData.ok) {
         dispatch(logoutSuccess());
         navigate("/");

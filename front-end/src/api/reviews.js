@@ -6,6 +6,7 @@ export const createReview = async function (id, review) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(review),
+      credentials: "include",
     });
     const data = await res.json();
     if (!res.ok) {
@@ -18,9 +19,13 @@ export const createReview = async function (id, review) {
 };
 
 // Get Reviews
-export const getReviews = async function ({signal}, id) {
+export const getReviews = async function ({ signal }, id) {
   try {
-    const res = await fetch(`${API}/api/product/reviews/${id}`, { signal });
+    const res = await fetch(`${API}/api/product/reviews/${id}`, {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+      signal
+    });
     const result = await res.json();
 
     if (!res.ok) throw new Error(result?.message);

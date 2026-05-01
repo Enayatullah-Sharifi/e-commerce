@@ -121,8 +121,8 @@ export const login = expressAsyncHandler(async (req, res) => {
     .cookie("token", token, {
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
-      sameSite: "lax",
-      secure: false, // true only in HTTPS
+      sameSite: "none",
+      secure: true, // true only in HTTPS
     })
     .json({
       success: true,

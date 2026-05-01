@@ -2,7 +2,10 @@ import API from "./base";
 
 export const getTopProducts = async function ({ signal }) {
   try {
-    const res = await fetch(`${API}/api/product/top`, { signal });
+    const res = await fetch(`${API}/api/product/top`, {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
     const result = await res.json();
     if (!res.ok) throw new Error(result?.message);
     return result.data;
@@ -13,7 +16,10 @@ export const getTopProducts = async function ({ signal }) {
 
 export const getAllProducts = async function (page, limit) {
   try {
-    const res = await fetch(`${API}/api/product?page=${page}&limit=${limit}`);
+    const res = await fetch(`${API}/api/product?page=${page}&limit=${limit}`, {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
     const result = await res.json();
     if (!res.ok) throw new Error(result?.message);
     return result;
@@ -25,7 +31,11 @@ export const getAllProducts = async function (page, limit) {
 export const getProductById = async function ({ queryKey, signal }) {
   try {
     const [, id] = queryKey;
-    const res = await fetch(`${API}/api/product/${id}`, { signal });
+    const res = await fetch(`${API}/api/product/${id}`, {
+      signal,
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
 
     if (!res.ok) throw new Error("Error getting product");
     const result = await res.json();
@@ -38,7 +48,10 @@ export const getProductById = async function ({ queryKey, signal }) {
 // Get Images
 export const getImages = async function () {
   try {
-    const res = await fetch(`${API}/api/product/images`);
+    const res = await fetch(`${API}/api/product/images`, {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
 
     if (!res.ok) throw new Error("No images found for slider");
     const result = await res.json();

@@ -6,6 +6,7 @@ export const addProductToWishlist = async (id) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id }),
+      credentials: "include",
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data?.message);
@@ -18,7 +19,10 @@ export const addProductToWishlist = async (id) => {
 // Get products wishlist
 export const getWishlist = async () => {
   try {
-    const res = await fetch(`${API}/api/wishlist`);
+    const res = await fetch(`${API}/api/wishlist`, {
+      method: "GET",
+      credentials: "include", // ✅ REQUIRED
+    });
     const data = await res.json();
 
     if (!res.ok) {
@@ -36,6 +40,7 @@ export const deleteProduct = async (e) => {
   try {
     const res = await fetch(`${API}/api/wishlist/${e}`, {
       method: "DELETE",
+      credentials: 'include'
     });
     const data = await res.json();
     if (!res.ok) {

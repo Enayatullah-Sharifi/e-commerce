@@ -7,6 +7,7 @@ export const placeOrder = async function (cartItems) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(cartItems),
+      credentials: 'include'
     });
     const data = await res.json();
 
