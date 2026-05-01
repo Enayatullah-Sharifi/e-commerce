@@ -122,32 +122,32 @@ function CartDetail() {
             <div className="flex items-center justify-center relative group">
               <img className="max-h-96 md:max-w-md" src={data?.img} alt="" />
 
-              {/* <span
-                className="absolute right-10 bottom-5 px-5 py-1 bg-(--dark-red--color) text-white flex items-center gap-4 rounded-sm cursor-pointer opacity-0 translate-y-3 scale-95 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 transition-all duration-300 ease-out delay-100
+              <span
+                className="hidden md:flex absolute right-10 bottom-5 px-5 py-1 bg-(--dark-red--color) text-white items-center gap-4 rounded-sm cursor-pointer opacity-0 translate-y-3 scale-95 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 transition-all duration-300 ease-out delay-100
       hover:scale-105 active:scale-95
     "
                 onClick={() => addToWishListHandler(data?._id)}
               >
                 Add to Wishlist <FaHeart size={24} />
-              </span> */}
+              </span>
 
-              <div className="absolute top-0 right-2 z-10">
-                {/* ❤️ Mobile: icon only */}
-                <button
-                  onClick={() => addToWishListHandler(data?._id)}
-                  className="
+              <button
+                onClick={() => addToWishListHandler(data?._id)}
+                className="
       flex items-center justify-center
       bg-white/90 backdrop-blur
       p-2 rounded-full shadow
       md:hidden
       active:scale-95
     "
-                >
-                  <FaHeart size={18} />
-                </button>
+              >
+                <FaHeart size={18} />
+              </button>
+              {/* <div className="absolute top-0 right-2 z-10"> */}
+              {/* ❤️ Mobile: icon only */}
 
-                {/* 💻 Desktop: hover button */}
-                <span
+              {/* 💻 Desktop: hover button */}
+              {/* <span
                   className="
       hidden md:flex
       absolute right-10 bottom-5
@@ -164,8 +164,8 @@ function CartDetail() {
                   onClick={() => addToWishListHandler(data?._id)}
                 >
                   Add to Wishlist <FaHeart size={18} />
-                </span>
-              </div>
+                </span> */}
+              {/* </div> */}
             </div>
 
             <h2 className="bg-slate-300 p-2 my-5 dark:text-white/70 dark:bg-slate-800 ">
