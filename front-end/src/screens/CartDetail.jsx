@@ -130,7 +130,7 @@ function CartDetail() {
                 Add to Wishlist <FaHeart size={24} />
               </span>
               <span
-                className="flex rounded-full md:hidden absolute right-10 bottom-5 p-4 bg-(--dark-red--color) text-white items-center gap-4
+                className="flex rounded-full md:hidden absolute right-10 bottom-5 p-2 bg-(--dark-red--color) text-white items-center gap-4
     "
                 onClick={() => addToWishListHandler(data?._id)}
               >
