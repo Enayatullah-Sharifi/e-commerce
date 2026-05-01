@@ -130,8 +130,15 @@ function CartDetail() {
               >
                 Add to Wishlist <FaHeart size={24} />
               </span>
+              <span
+                className="flex backdrop-blur md:hidden absolute right-10 bottom-5 px-5 py-1 bg-(--dark-red--color) text-white items-center gap-4 rounded-sm 
+    "
+                onClick={() => addToWishListHandler(data?._id)}
+              >
+                <FaHeart size={18} />
+              </span>
 
-              <button
+              {/* <button
                 onClick={() => addToWishListHandler(data?._id)}
                 className="
       flex items-center justify-center
@@ -142,7 +149,7 @@ function CartDetail() {
     "
               >
                 <FaHeart size={18} />
-              </button>
+              </button> */}
               {/* <div className="absolute top-0 right-2 z-10"> */}
               {/* ❤️ Mobile: icon only */}
 
